@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="models">
+        <item>Select model</item>
+        <item>Big 9</item>
+        <item>Callisto</item>
+        <item>Crossway</item>
+        <item>Dyson</item>
+        <item>Mars</item>
+        <item>Mercury</item>
+        <item>Velectrix</item>
+        <item>Venus</item>
+    </string-array>
+    <string-array name="weeklyrates">
+        <item>Select Weekly Rate</item>
+        <item>$75</item>
+        <item>$70</item>
+        <item>$65</item>
+        <item>$60</item>
+    </string-array>
+    <string-array name="pmtday">
+        <item>Select Rent Payment Day</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="firstweek">
+        <item>Select 1st Week Rent Paid</item>
+        <item>Transfer Bank</item>
+        <item>Credit Card</item>
+        <item>Cash</item>
+    </string-array>
+    <string-array name="secdep">
+        <item>Select Secure Deposit Paid</item>
+        <item>Bank Transfer</item>
+        <item>Credit Card</item>
+        <item>Cash</item>
+    </string-array>
+</resources>

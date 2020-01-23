@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:id="@+id/bike_edt">
+
+    <EditText
+        android:id="@+id/txtSerialNumber_edt"
+        android:layout_width="758dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:text="UT-201"
+        android:hint="serial Number"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spnModel_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/backhint"
+        android:entries="@array/models"
+        android:ems="10"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtSerialNumber_edt"
+        app:layout_constraintRight_toLeftOf="@+id/spnColor_edt" />
+
+    <Spinner
+        android:id="@+id/spnColor_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/backhint"
+        android:ems="10"
+        android:entries="@array/bikeColors"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/spnModel_edt"
+        app:layout_constraintTop_toBottomOf="@+id/txtSerialNumber_edt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="Number Of Weeks: "
+        android:id="@+id/tvRadio_edt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:background="@color/backhint"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/spnModel_edt"
+        app:layout_constraintRight_toLeftOf="@+id/rgWeeks_edt" />
+
+    <RadioGroup
+        android:id="@+id/rgWeeks_edt"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvRadio_edt"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/spnModel_edt">
+
+        <RadioButton
+            android:id="@+id/rbQuatroWeeks_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="04 Weeks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <RadioButton
+            android:id="@+id/rbOitoWeeks_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08 Weeks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        <RadioButton
+            android:id="@+id/rbOutrosWeeks_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/txtStartDate_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="Contract Start Date"
+        android:textStyle="bold"
+        android:inputType="date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/tvRadio_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtReturnDate_edt"/>
+
+    <EditText
+        android:id="@+id/txtReturnDate_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="Equipment Return Date"
+        android:textStyle="bold"
+        android:inputType="date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/tvRadio_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtStartDate_edt"/>
+
+    <Spinner
+        android:id="@+id/spnWeeklyRate_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/backhint"
+        android:entries="@array/weeklyrates"
+        android:ems="10"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtStartDate_edt"
+        app:layout_constraintRight_toLeftOf="@+id/spnPmtDay_edt" />
+
+    <Spinner
+        android:id="@+id/spnPmtDay_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/backhint"
+        android:ems="10"
+        android:entries="@array/pmtday"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/spnWeeklyRate_edt"
+        app:layout_constraintTop_toBottomOf="@+id/txtStartDate_edt" />
+
+    <Spinner
+        android:id="@+id/spnFirstWeek_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/backhint"
+        android:entries="@array/firstweek"
+        android:ems="10"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/spnWeeklyRate_edt"
+        app:layout_constraintRight_toLeftOf="@+id/spnSecDep_edt" />
+
+    <Spinner
+        android:id="@+id/spnSecDep_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/backhint"
+        android:ems="10"
+        android:entries="@array/secdep"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/spnFirstWeek_edt"
+        app:layout_constraintTop_toBottomOf="@+id/spnWeeklyRate_edt" />
+
+    <TextView
+        android:id="@+id/tvAcessorios_edt"
+        android:layout_width="756dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="Accessories included in this rent (select)"
+        android:textColor="@color/redColor"
+        android:textAlignment="center"
+        android:paddingVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/spnFirstWeek_edt" />
+
+    <TextView
+        android:id="@+id/tvAcessorios2_edt"
+        android:layout_width="756dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:paddingVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvAcessorios_edt" />
+
+    <CheckBox
+        android:id="@+id/chkHelmet_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Helmet"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/tvAcessorios2_edt"
+        app:layout_constraintRight_toLeftOf="@+id/chkPhoneHolder_edt"/>
+
+    <CheckBox
+        android:id="@+id/chkPhoneHolder_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Phone Holder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/tvAcessorios2_edt"
+        app:layout_constraintRight_toLeftOf="@+id/chkHelmet_edt"/>
+
+    <CheckBox
+        android:id="@+id/chkRemovableFrontLight_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Removable Front Light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/chkHelmet_edt"
+        app:layout_constraintLeft_toRightOf="@+id/chkRemovableRearLight_edt"/>
+
+    <CheckBox
+        android:id="@+id/chkRemovableRearLight_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Removable Rear Light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/chkHelmet_edt"
+        app:layout_constraintRight_toLeftOf="@+id/chkRemovableFrontLight_edt"/>
+
+    <CheckBox
+        android:id="@+id/chkFixedFrontLight_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Fixed Front Light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/chkRemovableFrontLight_edt"
+        app:layout_constraintRight_toLeftOf="@+id/chkFixedRearLight_edt"/>
+
+    <CheckBox
+        android:id="@+id/chkFixedRearLight_edt"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/backhint"
+        android:text="Fixed Rear Light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/chkRemovableFrontLight_edt"
+        app:layout_constraintLeft_toRightOf="@+id/chkFixedFrontLight_edt"/>
+
+    <EditText
+        android:layout_width="756dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="18dp"
+        android:id="@+id/txtNotes_edt"
+        android:hint="Notes"
+        android:lines="16"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        android:background="@color/backhint"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@+id/chkFixedFrontLight_edt"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/btnVoltar_edt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp" />
+
+    <Button
+        android:id="@+id/btnSalvar_edt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/btnVoltar_edt"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="0.48" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

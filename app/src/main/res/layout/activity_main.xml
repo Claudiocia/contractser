@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_activity"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/barra_sup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/includemain"
+        layout="@layout/content_main"
+        android:visibility="visible"/>
+    <include
+        android:id="@+id/includecliente"
+        layout="@layout/content_client"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includecliente_edt"
+        layout="@layout/content_client_edt"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includebike"
+        layout="@layout/content_bike"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includebike_edt"
+        layout="@layout/content_bike_edt"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includeassina"
+        layout="@layout/content_assina"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includeassina_edt"
+        layout="@layout/content_assina_edt"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includeassina_viu"
+        layout="@layout/content_assina_viu"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includecontract_pdf"
+        layout="@layout/contract_pdf"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includefoto_passaporte"
+        layout="@layout/content_photo_passport"
+        android:visibility="invisible"/>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

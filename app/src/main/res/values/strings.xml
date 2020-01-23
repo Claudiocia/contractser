@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ContractsER</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="loading">Loading, please wait...</string>
+    <string name="term1">i have read the rental terms and conditions
+        and i hereby declare that by signing this agreement, i agree
+        to contract the equipment in accordance with the terms and conditions.
+        i acknowledge, understand and agree to all the
+        details mentioned in the terms and conditions.</string>
+    <string name="term2">i acknowledge, understand and agree to all the
+        details mentioned in the terms and conditions.</string>
+    <string name="term3">i confirm that the bicycle has been inspected
+        by me and the representatives of easy ride and that it is in perfect condition.</string>
+    <string name="operator">Company which is offering the bicycle for rental - operator</string>
+    <string name="nameBusiness">Business trading name: EASY RIDE</string>
+    <string name="emailBusiness">E-mail: info@myeasyride.com.au</string>
+    <string name="phoneBusiness">Mobile Num.: 0 434-413-679</string>
+    <string name="personRenting">Person who is renting the bicycle – Hirer</string>
+    <string name="tituloBike">Bike specifications and accessories</string>
+
+
+</resources>

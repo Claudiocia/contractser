@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    android:id="@+id/cliente_edt"
+    tools:showIn="@layout/activity_main">
+
+    <EditText
+        android:id="@+id/txtNome_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="full name"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtDateBirth_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/backhint"
+        android:ems="10"
+        android:hint="date of birth"
+        android:inputType="date"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintLeft_toRightOf="@+id/txtNome_edt" />
+
+    <EditText
+        android:id="@+id/txtPassportNumber_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="passaport number"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtNome_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtPassportCountry_edt"/>
+
+    <EditText
+        android:id="@+id/txtPassportCountry_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="passaport country"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtNome_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtPassportNumber_edt"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="Gender: "
+        android:id="@+id/textView_edt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:background="@color/backhint"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassportNumber_edt"
+        app:layout_constraintRight_toLeftOf="@+id/rgSexo_edt" />
+
+    <RadioGroup
+        android:id="@+id/rgSexo_edt"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView_edt"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassportNumber_edt">
+
+        <RadioButton
+            android:id="@+id/rbMasculino_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MALE"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <RadioButton
+            android:id="@+id/rbFeminino_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FEMALE"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        <RadioButton
+            android:id="@+id/rbOutro_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OTHER"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/txtAddress_edt"
+        android:layout_width="758dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="address"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textPostalAddress"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/textView_edt"/>
+
+    <EditText
+        android:id="@+id/txtSuburb_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="Suburb"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textPostalAddress"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddress_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtState_edt"/>
+
+    <EditText
+        android:id="@+id/txtState_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="state"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textPostalAddress"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddress_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtSuburb_edt"/>
+
+    <EditText
+        android:id="@+id/txtPostCode_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="postcode"
+        android:textStyle="bold"
+        android:inputType="number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtSuburb_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtEmail_edt"/>
+
+    <EditText
+        android:id="@+id/txtEmail_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="e-mail"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textEmailAddress"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtSuburb_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtPostCode_edt"/>
+
+    <EditText
+        android:id="@+id/txtSchool_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="School"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textCapSentences"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtPostCode_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtVisaAgency_edt"/>
+
+    <EditText
+        android:id="@+id/txtVisaAgency_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="visaAgency"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:inputType="textCapSentences"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtPostCode_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtSchool_edt"/>
+
+    <EditText
+        android:id="@+id/txtAustrNumber_edt"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="Australian Number phone"
+        android:text="(+61)"
+        android:textStyle="bold"
+        android:inputType="phone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtSchool_edt"
+        app:layout_constraintRight_toLeftOf="@+id/txtWhatsapp_edt"/>
+
+    <EditText
+        android:id="@+id/txtWhatsapp_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:background="@color/backhint"
+        android:hint="Whatsapp Number"
+        android:textStyle="bold"
+        android:inputType="phone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@+id/txtSchool_edt"
+        app:layout_constraintLeft_toRightOf="@+id/txtAustrNumber_edt"/>
+
+
+    <Button
+        android:id="@+id/btnProximo_edt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
