@@ -605,7 +605,7 @@
         android:id="@+id/btnEncerra_viu"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Terminate"
+        android:text="Reactivate"
         android:background="@color/redColor"
         android:textColor="@color/white"
         android:layout_marginRight="8dp"

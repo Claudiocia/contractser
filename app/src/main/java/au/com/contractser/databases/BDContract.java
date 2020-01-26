@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import au.com.contractser.models.Contract;
@@ -114,6 +116,26 @@ public class BDContract {
         String[] args = new String[]{""+id};
         ContentValues valores = new ContentValues();
         valores.put("passportPhoto", arquivoPath);
+
+        return bd.update("tbl_contracts", valores, "idContract = ?", args) > 0;
+    }
+
+    public boolean encerrarContract(int id){
+        String[] args = new String[]{""+id};
+        String data = getDataAtual();
+        ContentValues valores = new ContentValues();
+        valores.put("ativo", 0);
+        valores.put("fechaData", data);
+
+        return bd.update("tbl_contracts", valores, "idContract = ?", args) > 0;
+    }
+
+    public boolean reativarContract(int id){
+        String[] args = new String[]{""+id};
+        String data = getDataAtual();
+        ContentValues valores = new ContentValues();
+        valores.put("ativo", 1);
+        valores.put("fechaData", data);
 
         return bd.update("tbl_contracts", valores, "idContract = ?", args) > 0;
     }
@@ -404,5 +426,13 @@ public class BDContract {
         }
 
         return null;
+    }
+
+    public String getDataAtual() {
+        String data;
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataAtual = new Date(System.currentTimeMillis());
+        data = sd.format(dataAtual);
+        return data;
     }
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/list_all_activity"
+    tools:context=".AllListActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/barra_sup_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/includemain_all"
+        layout="@layout/content_all"
+        android:visibility="visible"/>
+    <include
+        android:id="@+id/includeassina_viu_all"
+        layout="@layout/content_assina_viu_all"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includeassina_edt_all"
+        layout="@layout/content_assina_edt_all"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includecontract_pdf_all"
+        layout="@layout/contract_pdf"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includefoto_passaporte_all"
+        layout="@layout/content_photo_passport"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includecliente_edt_all"
+        layout="@layout/content_client_edt"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/includebike_edt_all"
+        layout="@layout/content_bike_edt"
+        android:visibility="invisible"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

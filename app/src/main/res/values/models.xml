@@ -29,14 +29,14 @@
     </string-array>
     <string-array name="firstweek">
         <item>Select 1st Week Rent Paid</item>
-        <item>Transfer Bank</item>
-        <item>Credit Card</item>
+        <item>Bank Transfer</item>
+        <item>Card</item>
         <item>Cash</item>
     </string-array>
     <string-array name="secdep">
         <item>Select Secure Deposit Paid</item>
         <item>Bank Transfer</item>
-        <item>Credit Card</item>
+        <item>Card</item>
         <item>Cash</item>
     </string-array>
 </resources>

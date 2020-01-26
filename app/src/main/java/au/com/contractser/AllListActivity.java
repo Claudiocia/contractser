@@ -61,7 +61,7 @@ import au.com.contractser.utils.CaptureSignatureView;
 import au.com.contractser.utils.MaskEditUtil;
 import au.com.contractser.utils.ViewPrintAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class AllListActivity extends AppCompatActivity {
     private AlertDialog alerta;
     private final int PERMISSAO_REQUEST = 2;
     String caminhoDaImagem;
@@ -82,16 +82,11 @@ public class MainActivity extends AppCompatActivity {
     String removableRearLight = "Removable Rear Light";
     String fixedFrontLight = "Fixed Front Light";
     String fixedRearLight = "Fixed Rear Light";
-    String userName = "admin";
-    Bitmap assBitmap;
-    byte[] assinatura;
+
     boolean sucesso;
 
-    String fullName, dateBirth, passportNumber, passportCountry, sexo, address;
-    String suburb, state, postCode, email, school, visaAgency, austrNumber, whatsNumber;
-    String serialNumber, model, color, weeks, startDate, returnDate, weeklyRate;
-    String pmtDay, firtsWeek, secDep, accessories, notes, passportPhoto;
-    int termo1, termo3, idCont;
+    String accessories, passportPhoto;
+    int idCont;
 
     //Variaveis de edição
     String fullNameEdt, dateBirthEdt, passportNumberEdt, passportCountryEdt, sexoEdt, addressEdt;
@@ -99,18 +94,9 @@ public class MainActivity extends AppCompatActivity {
     String serialNumberEdt, modelEdt, colorEdt, weeksEdt, startDateEdt, returnDateEdt, weeklyRateEdt;
     String pmtDayEdt, firtsWeekEdt, secDepEdt, notesEdt;
 
-    EditText txtFullName, txtDateBirth, txtPassportNumber, txtPassportCountry;
-    EditText txtAddress, txtSuburb, txtState, txtPostCode, txtEmail, txtSchool;
-    EditText txtVisaAgency, txtAustrNumber, txtWhatsappNumber, txtSerialNumber;
-    EditText txtStartDate, txtReturnDate, txtNotes;
 
     Spinner spnModel, spnColor, spnWeeklyRate, spnPmtDay, spnFirstWeek, spnSecDep;
-    CheckBox chkHelmet, chkPhoneHolder, chkRemovableFrontLight;
-    CheckBox chkRemovableRearLight, chkFixedFrontLight, chkFixedRearLight;
     CheckBox chkTerm3, chkTerm1;
-
-    RadioGroup rgWeeks, rgSexo;
-    RadioButton btnSexo, btnWeeks;
 
     EditText txtFullNameEdt, txtDateBirthEdt, txtPassportNumberEdt, txtPassportCountryEdt;
     EditText txtAddressEdt, txtSuburbEdt, txtStateEdt, txtPostCodeEdt, txtEmailEdt, txtSchoolEdt;
@@ -174,13 +160,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_list_all);
+        //Toolbar toolbar = findViewById(R.id.toolbar_all);
+        //setSupportActionBar(toolbar);
         barraSup = getSupportActionBar();
-
-        mContent = (LinearLayout)findViewById(R.id.assinatura);
-        mSig = new CaptureSignatureView(this, null);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -190,67 +173,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //Campos Form Cliente
-        txtFullName = (EditText)findViewById(R.id.txtNome);
-        txtFullName.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtDateBirth = (EditText)findViewById(R.id.txtDateBirth);
-        txtDateBirth.addTextChangedListener(MaskEditUtil.mask(txtDateBirth, MaskEditUtil.FORMAT_DATE));
-        txtPassportNumber = (EditText)findViewById(R.id.txtPassportNumber);
-        txtPassportNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        txtPassportCountry = (EditText)findViewById(R.id.txtPassportCountry);
-        txtPassportCountry.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        rgSexo = (RadioGroup)findViewById(R.id.rgSexo);
-        txtAddress = (EditText)findViewById(R.id.txtAddress);
-        txtAddress.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtSuburb = (EditText)findViewById(R.id.txtSuburb);
-        txtSuburb.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtState = (EditText)findViewById(R.id.txtState);
-        txtState.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtPostCode = (EditText)findViewById(R.id.txtPostCode);
-        txtPostCode.addTextChangedListener(MaskEditUtil.mask(txtPostCode, MaskEditUtil.FORMAT_POST_CODE));
-        txtEmail = (EditText)findViewById(R.id.txtEmail);
-        txtEmail.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtSchool = (EditText)findViewById(R.id.txtSchool);
-        txtSchool.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtVisaAgency = (EditText)findViewById(R.id.txtVisaAgency);
-        txtVisaAgency.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        txtAustrNumber = (EditText)findViewById(R.id.txtAustrNumber);
-        txtAustrNumber.addTextChangedListener(MaskEditUtil.mask(txtAustrNumber, MaskEditUtil.FORMAT_PHONE));
-        txtWhatsappNumber = (EditText)findViewById(R.id.txtWhatsapp);
-        txtWhatsappNumber.addTextChangedListener(MaskEditUtil.mask(txtWhatsappNumber, MaskEditUtil.FORMAT_PHONE_WA));
-
-        //Campos Form Bike
-        txtSerialNumber = (EditText)findViewById(R.id.txtSerialNumber);
-        txtSerialNumber.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        spnModel = (Spinner)findViewById(R.id.spnModel);
-        spnColor = (Spinner)findViewById(R.id.spnColor);
-        rgWeeks = (RadioGroup)findViewById(R.id.rgWeeks);
-        txtStartDate = (EditText)findViewById(R.id.txtStartDate);
-        txtStartDate.addTextChangedListener(MaskEditUtil.mask(txtStartDate, MaskEditUtil.FORMAT_DATE));
-        txtReturnDate = (EditText)findViewById(R.id.txtReturnDate);
-        txtReturnDate.addTextChangedListener(MaskEditUtil.mask(txtReturnDate, MaskEditUtil.FORMAT_DATE));
-        spnWeeklyRate = (Spinner)findViewById(R.id.spnWeeklyRate);
-        spnPmtDay = (Spinner)findViewById(R.id.spnPmtDay);
-        spnFirstWeek = (Spinner)findViewById(R.id.spnFirstWeek);
-        spnSecDep = (Spinner)findViewById(R.id.spnSecDep);
-        txtNotes = (EditText)findViewById(R.id.txtNotes);
-        txtNotes.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-
-        chkHelmet = (CheckBox)findViewById(R.id.chkHelmet);
-        chkPhoneHolder = (CheckBox)findViewById(R.id.chkPhoneHolder);
-        chkRemovableFrontLight = (CheckBox)findViewById(R.id.chkRemovableFrontLight);
-        chkRemovableRearLight = (CheckBox)findViewById(R.id.chkRemovableRearLight);
-        chkFixedFrontLight = (CheckBox)findViewById(R.id.chkFixedFrontLight);
-        chkFixedRearLight = (CheckBox)findViewById(R.id.chkFixedRearLight);
-
 
         Intent intent = getIntent();
         if (intent.hasExtra("contract_edt")){
-            findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includecliente_edt).setVisibility(View.VISIBLE);
-            findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-
+            findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
+            findViewById(R.id.includecliente_edt_all).setVisibility(View.VISIBLE);
+            findViewById(R.id.includebike_edt_all).setVisibility(View.INVISIBLE);
 
             txtFullNameEdt = (EditText)findViewById(R.id.txtNome_edt);
             txtFullNameEdt.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
@@ -308,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("claudio", "O que vem no intent é : "+ idCont);
 
-            BDContract bdContr = new BDContract(MainActivity.this);
+            BDContract bdContr = new BDContract(AllListActivity.this);
             contractEditado = bdContr.buscarPorId(idCont);
 
             txtFullNameEdt.setText(contractEditado.getFullName());
@@ -336,8 +264,8 @@ public class MainActivity extends AppCompatActivity {
             txtAustrNumberEdt.setText(contractEditado.getAustralianNumber());
             txtWhatsappNumberEdt.setText(contractEditado.getWhatsApp());
             txtSerialNumberEdt.setText(contractEditado.getSerialNumber());
-            spnModelEdt.setSelection(getIndex(spnModel, contractEditado.getModel()));
-            spnColorEdt.setSelection(getIndex(spnColor, contractEditado.getColor()));
+            spnModelEdt.setSelection(getIndex(spnModelEdt, contractEditado.getModel()));
+            spnColorEdt.setSelection(getIndex(spnColorEdt, contractEditado.getColor()));
             if (contractEditado.getNumberWeeks() != null){
                 RadioButton rb2;
                 if (contractEditado.getNumberWeeks().contentEquals("04 Weeks")){
@@ -351,10 +279,10 @@ public class MainActivity extends AppCompatActivity {
             }
             txtStartDateEdt.setText(contractEditado.getStartDate());
             txtReturnDateEdt.setText(contractEditado.getReturnDate());
-            spnWeeklyRateEdt.setSelection(getIndex(spnWeeklyRate, contractEditado.getWeeklyRate()));
-            spnPmtDayEdt.setSelection(getIndex(spnPmtDay, contractEditado.getPmtDay()));
-            spnFirstWeekEdt.setSelection(getIndex(spnFirstWeek, contractEditado.getFirstWeek()));
-            spnSecDepEdt.setSelection(getIndex(spnSecDep, contractEditado.getSecDep()));
+            spnWeeklyRateEdt.setSelection(getIndex(spnWeeklyRateEdt, contractEditado.getWeeklyRate()));
+            spnPmtDayEdt.setSelection(getIndex(spnPmtDayEdt, contractEditado.getPmtDay()));
+            spnFirstWeekEdt.setSelection(getIndex(spnFirstWeekEdt, contractEditado.getFirstWeek()));
+            spnSecDepEdt.setSelection(getIndex(spnSecDepEdt, contractEditado.getSecDep()));
             txtNotesEdt.setText(contractEditado.getNotes());
 
             String voltaAcessorios = contractEditado.getAccessoriesIncluded();
@@ -401,11 +329,9 @@ public class MainActivity extends AppCompatActivity {
 
         else if(intent.hasExtra("contract_pdf")){
 
-            findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includecliente_edt).setVisibility(View.INVISIBLE);
-            findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includeassina_viu).setVisibility(View.VISIBLE);
+            findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
+            findViewById(R.id.includecliente_edt_all).setVisibility(View.INVISIBLE);
+            findViewById(R.id.includeassina_viu_all).setVisibility(View.VISIBLE);
 
 
             tvFullNameViu = (TextView)findViewById(R.id.tvFullName_viu);
@@ -486,9 +412,8 @@ public class MainActivity extends AppCompatActivity {
 
         else if (intent.hasExtra("contract_photo")){
 
-            findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-            findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-            findViewById(R.id.includefoto_passaporte).setVisibility(View.VISIBLE);
+            findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
+            findViewById(R.id.includefoto_passaporte_all).setVisibility(View.VISIBLE);
 
             idCont = intent.getIntExtra("contract_photo", 0);
 
@@ -508,25 +433,25 @@ public class MainActivity extends AppCompatActivity {
 
                 ivPhotoPassport =(ImageView)findViewById(R.id.iv_photo_passport);
 
-                usarCamera(findViewById(R.id.main_activity), nomeArquivoPho);
+                usarCamera(findViewById(R.id.list_all_activity), nomeArquivoPho);
 
                 Button btnSalvar = (Button)findViewById(R.id.btnVoltar_photo);
                 btnSalvar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         boolean photo = false;
-                        final BDContract bdPassaport = new BDContract(MainActivity.this);
+                        final BDContract bdPassaport = new BDContract(AllListActivity.this);
                         photo = bdPassaport.salvarPassaport(caminhoPassaport, idCont);
 
                         if (!photo){
-                            Toast.makeText(MainActivity.this, "Something happened and the picture was not saved!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AllListActivity.this, "Something happened and the picture was not saved!", Toast.LENGTH_LONG).show();
                             finish();
-                            Intent it = new Intent(MainActivity.this, MainActivity.class);
+                            Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                             startActivity(it);
                         } else{
-                            Toast.makeText(MainActivity.this, "Photo saved on Database!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AllListActivity.this, "Photo saved on Database!", Toast.LENGTH_LONG).show();
                             finish();
-                            Intent it = new Intent(MainActivity.this, MainActivity.class);
+                            Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                             startActivity(it);
                         }
                     }
@@ -546,7 +471,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         finish();
-                        Intent it = new Intent(MainActivity.this, MainActivity.class);
+                        Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                         startActivity(it);
                     }
                 });
@@ -560,7 +485,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent it = new Intent(MainActivity.this, MainActivity.class);
+                Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                 startActivity(it);
             }
         });
@@ -570,17 +495,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog alertEncerra;
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AllListActivity.this);
                 builder.setTitle("Confirmation");
-                builder.setMessage("Are you sure you want to terminate this contract?");
+                builder.setMessage("Are you sure you want to reactivate this contract?");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         boolean encerrado;
-                        BDContract bdEncerra =  new BDContract(MainActivity.this);
-                        encerrado = bdEncerra.encerrarContract(idCont);
+                        BDContract bdEncerra =  new BDContract(AllListActivity.this);
+                        encerrado = bdEncerra.reativarContract(idCont);
                         if(!encerrado){
-                            toast = Toast.makeText(MainActivity.this, "Error - Contract still active", Toast.LENGTH_LONG);
+                            toast = Toast.makeText(AllListActivity.this, "Error - Contract still inactive", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                             Handler handler = new Handler();
@@ -591,7 +516,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }, 1500);
                         }else{
-                            toast2 = Toast.makeText(MainActivity.this, "Success - Contract is terminated!", Toast.LENGTH_LONG);
+                            toast2 = Toast.makeText(AllListActivity.this, "Success - Contract is reactivated!", Toast.LENGTH_LONG);
                             toast2.setGravity(Gravity.CENTER, 0, 0);
                             toast2.show();
                             Handler handler = new Handler();
@@ -602,7 +527,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }, 1500);
                             finish();
-                            Intent it = new Intent(MainActivity.this, MainActivity.class);
+                            Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                             startActivity(it);
                         }
                     }
@@ -624,8 +549,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Implementar metodo para gerar PDF
 
-                findViewById(R.id.includeassina_viu).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecontract_pdf).setVisibility(View.VISIBLE);
+                findViewById(R.id.includeassina_viu_all).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includecontract_pdf_all).setVisibility(View.VISIBLE);
 
                 tvFullNamePdf = (TextView)findViewById(R.id.tvFullName_pdf);
                 tvDateBirthPdf = (TextView)findViewById(R.id.tvDateBirth_pdf);
@@ -658,7 +583,7 @@ public class MainActivity extends AppCompatActivity {
                 ivAssinaturaPdf = (ImageView)findViewById(R.id.iv_assinatura_pdf);
 
 
-                BDContract bdContr2 = new BDContract(MainActivity.this);
+                BDContract bdContr2 = new BDContract(AllListActivity.this);
                 Contract c2 = new Contract();
                 c2 = bdContr2.buscarPorId(idCont);
                 Log.d("claudio", "idCont é:"+ idCont);
@@ -706,7 +631,7 @@ public class MainActivity extends AppCompatActivity {
                 String nomePDF2 = c2.getIdContract()+ "_"+c2.getFullName();
 
                 PrintManager printManager = (PrintManager) getSystemService(PRINT_SERVICE);
-                printManager.print("Contract", new ViewPrintAdapter(nomePDF2,MainActivity.this,
+                printManager.print("Contract", new ViewPrintAdapter(nomePDF2, AllListActivity.this,
                         findViewById(R.id.main_activity)), null);
             }
         });
@@ -991,7 +916,7 @@ public class MainActivity extends AppCompatActivity {
                                                                                                             contract.setAccessoriesIncluded(acessEdtFinal);
                                                                                                             contract.setNotes(notesEdt);
 
-                                                                                                            BDContract bdContract = new BDContract(MainActivity.this);
+                                                                                                            BDContract bdContract = new BDContract(AllListActivity.this);
 
                                                                                                             bdContract.atualizar(contract);
 
@@ -1004,7 +929,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                                                                                 int idContr = contractEditado.getIdContract();
 
-                                                                                                                BDContract bdContract2 = new BDContract(MainActivity.this);
+                                                                                                                BDContract bdContract2 = new BDContract(AllListActivity.this);
 
                                                                                                                 Log.d("claudio", "O id que chamo no banco é: " + idContr);
 
@@ -1037,14 +962,11 @@ public class MainActivity extends AppCompatActivity {
                                                                                                                 tvAccessoriesEdt.setText("Accessories included in this rent: \n" + c.getAccessoriesIncluded());
                                                                                                                 tvNotesEdt.setText("Notes: \n" + c.getNotes());
 
-                                                                                                                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includecliente).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includeassina_edt).setVisibility(View.VISIBLE);
-                                                                                                                findViewById(R.id.includecliente_edt).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includebike_edt).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
+
+                                                                                                                findViewById(R.id.includeassina_edt_all).setVisibility(View.VISIBLE);
+                                                                                                                findViewById(R.id.includecliente_edt_all).setVisibility(View.INVISIBLE);
+                                                                                                                findViewById(R.id.includebike_edt_all).setVisibility(View.INVISIBLE);
+                                                                                                                findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
                                                                                                             }
                                                                                                         }
                                                                                                     }
@@ -1132,43 +1054,13 @@ public class MainActivity extends AppCompatActivity {
         chkTerm3 = (CheckBox)findViewById(R.id.chkTerm3);
 
 
-        Button btnNext = (Button)findViewById(R.id.btnProximo);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente).setVisibility(View.INVISIBLE);
-                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike).setVisibility(View.VISIBLE);
-                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-            }
-        });
-
         Button btnNextEdt = (Button)findViewById(R.id.btnProximo_edt);
         btnNextEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente).setVisibility(View.INVISIBLE);
-                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente_edt).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike_edt).setVisibility(View.VISIBLE);
-            }
-        });
-
-        Button btnVoltar = (Button)findViewById(R.id.btnVoltar);
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente_edt).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike_edt).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includecliente_edt_all).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includebike_edt_all).setVisibility(View.VISIBLE);
             }
         });
 
@@ -1176,492 +1068,26 @@ public class MainActivity extends AppCompatActivity {
         btnVoltarEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente).setVisibility(View.INVISIBLE);
-                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente_edt).setVisibility(View.VISIBLE);
-                findViewById(R.id.includebike_edt).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includemain_all).setVisibility(View.INVISIBLE);
+                findViewById(R.id.includecliente_edt_all).setVisibility(View.VISIBLE);
+                findViewById(R.id.includebike_edt_all).setVisibility(View.INVISIBLE);
             }
         });
 
-        Button btnLimpar = (Button)findViewById(R.id.btnLimpar);
-        btnLimpar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSig.ClearCanvas();
-            }
-        });
 
-        Button btnSalvar = (Button)findViewById(R.id.btnSalvar);
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (txtFullName.getText().toString().length() <= 5){
-                    txtFullName.setBackgroundColor(Color.parseColor("#ff0000"));
-                    alerta = alertaErro();
-                    alerta.show();
-                    txtFullName.setFocusable(true);
-                    findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                    findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                }else{
-                    txtFullName.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                    fullName = txtFullName.getText().toString();
-                    if (txtDateBirth.getText().toString().length() != 10){
-                        txtDateBirth.setBackgroundColor(Color.parseColor("#ff0000"));
-                        alerta = alertaErro();
-                        alerta.show();
-                        txtDateBirth.setFocusable(true);
-                        findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                        findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                    }else{
-                        txtDateBirth.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                        dateBirth = txtDateBirth.getText().toString();
-                        if (txtPassportNumber.getText().toString().length() <= 3){
-                            txtPassportNumber.setBackgroundColor(Color.parseColor("#ff0000"));
-                            alerta = alertaErro();
-                            alerta.show();
-                            txtPassportNumber.setFocusable(true);
-                            findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                            findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                        }else {
-                            txtPassportNumber.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                            passportNumber = txtPassportNumber.getText().toString();
-                            if (txtPassportCountry.getText().toString().length() <= 1){
-                                txtPassportCountry.setBackgroundColor(Color.parseColor("#ff0000"));
-                                alerta = alertaErro();
-                                alerta.show();
-                                txtPassportCountry.setFocusable(true);
-                                findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                            }else {
-                                txtPassportCountry.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                passportCountry = txtPassportCountry.getText().toString();
-                                if (rgSexo.getCheckedRadioButtonId() == -1){
-                                    rgSexo.setBackgroundColor(Color.parseColor("#ff0000"));
-                                    alerta = alertaErro();
-                                    alerta.show();
-                                    rgSexo.setFocusable(true);
-                                    findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                    findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                }else {
-                                    rgSexo.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                                    int idSexo = rgSexo.getCheckedRadioButtonId();
-                                    btnSexo = (RadioButton)findViewById(idSexo);
-                                    sexo = btnSexo.getText().toString();
-                                    if (txtAddress.getText().toString().length() <= 4){
-                                        txtAddress.setBackgroundColor(Color.parseColor("#ff0000"));
-                                        alerta = alertaErro();
-                                        alerta.show();
-                                        txtAddress.setFocusable(true);
-                                        findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                        findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                    }else {
-                                        txtAddress.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                        address = txtAddress.getText().toString();
-                                        if (txtSuburb.getText().toString().length() <= 3){
-                                            txtSuburb.setBackgroundColor(Color.parseColor("#ff0000"));
-                                            alerta = alertaErro();
-                                            alerta.show();
-                                            txtSuburb.setFocusable(true);
-                                            findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                            findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                        }else {
-                                            txtSuburb.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                            suburb = txtSuburb.getText().toString();
-                                            if (txtState.getText().toString().length() <= 1){
-                                                txtState.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                alerta = alertaErro();
-                                                alerta.show();
-                                                txtState.setFocusable(true);
-                                                findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                            }else {
-                                                txtState.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                state = txtState.getText().toString();
-                                                if (txtPostCode.getText().toString().length() <= 3){
-                                                    txtPostCode.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                    alerta = alertaErro();
-                                                    alerta.show();
-                                                    txtPostCode.setFocusable(true);
-                                                    findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                    findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                }else {
-                                                    txtPostCode.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                    postCode = txtPostCode.getText().toString();
-                                                    if (txtEmail.getText().toString().length() <= 6){
-                                                        txtEmail.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                        alerta = alertaErro();
-                                                        alerta.show();
-                                                        txtEmail.setFocusable(true);
-                                                        findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                        findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                    }else {
-                                                        txtEmail.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                        email = txtEmail.getText().toString();
-                                                        if (txtSchool.getText().toString().length() <=2){
-                                                            txtSchool.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                            alerta = alertaErro();
-                                                            alerta.show();
-                                                            txtSchool.setFocusable(true);
-                                                            findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                            findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                        }else {
-                                                            txtSchool.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                            school = txtSchool.getText().toString();
-                                                            if (txtVisaAgency.getText().toString().length() <= 2){
-                                                                txtVisaAgency.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                alerta = alertaErro();
-                                                                alerta.show();
-                                                                txtVisaAgency.setFocusable(true);
-                                                                findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                            }else {
-                                                                txtVisaAgency.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                visaAgency = txtVisaAgency.getText().toString();
-                                                                if (txtAustrNumber.getText().toString().length() <= 17){
-                                                                    txtAustrNumber.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                    alerta = alertaErro();
-                                                                    alerta.show();
-                                                                    txtAustrNumber.setFocusable(true);
-                                                                    findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                                                                    findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                                }else {
-                                                                    txtAustrNumber.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                    austrNumber = txtAustrNumber.getText().toString();
-                                                                    whatsNumber = txtWhatsappNumber.getText().toString();
-                                                                    if (txtSerialNumber.getText().toString().length() <= 7){
-                                                                        txtSerialNumber.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                        alerta = alertaErro();
-                                                                        alerta.show();
-                                                                        txtSerialNumber.setFocusable(true);
-                                                                    }else {
-                                                                        txtSerialNumber.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                        serialNumber = txtSerialNumber.getText().toString();
-                                                                        if (spnModel.getSelectedItemId() <= 0){
-                                                                            spnModel.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                            alerta = alertaErro();
-                                                                            alerta.show();
-                                                                            spnModel.setFocusable(true);
-                                                                        }else {
-                                                                            spnModel.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                            model = spnModel.getSelectedItem().toString();
-                                                                            if (spnColor.getSelectedItemId() <= 0){
-                                                                                spnColor.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                alerta = alertaErro();
-                                                                                alerta.show();
-                                                                                spnColor.setFocusable(true);
-                                                                            }else {
-                                                                                spnColor.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                color = spnColor.getSelectedItem().toString();
-                                                                                if (rgWeeks.getCheckedRadioButtonId() == -1){
-                                                                                    rgWeeks.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                    alerta = alertaErro();
-                                                                                    alerta.show();
-                                                                                    rgWeeks.setFocusable(true);
-                                                                                }else {
-                                                                                    rgWeeks.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                    int idWeeks = rgWeeks.getCheckedRadioButtonId();
-                                                                                    btnWeeks = (RadioButton)findViewById(idWeeks);
-                                                                                    weeks = btnWeeks.getText().toString();
-                                                                                    if (txtStartDate.getText().toString().length() != 10){
-                                                                                        txtStartDate.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                        alerta = alertaErro();
-                                                                                        alerta.show();
-                                                                                        txtStartDate.setFocusable(true);
-                                                                                    }else {
-                                                                                        txtStartDate.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                        startDate = txtStartDate.getText().toString();
-                                                                                        if (txtReturnDate.getText().toString().length() != 10){
-                                                                                            txtReturnDate.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                            alerta = alertaErro();
-                                                                                            alerta.show();
-                                                                                            txtReturnDate.setFocusable(true);
-                                                                                        }else {
-                                                                                            txtReturnDate.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                            returnDate = txtReturnDate.getText().toString();
-                                                                                            if (spnWeeklyRate.getSelectedItemId() <= 0 ){
-                                                                                                spnWeeklyRate.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                                alerta = alertaErro();
-                                                                                                alerta.show();
-                                                                                                spnWeeklyRate.setFocusable(true);
-                                                                                            }else {
-                                                                                                spnWeeklyRate.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                                weeklyRate = spnWeeklyRate.getSelectedItem().toString();
-                                                                                                if (spnPmtDay.getSelectedItemId() <= 0){
-                                                                                                    spnPmtDay.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                                    alerta = alertaErro();
-                                                                                                    alerta.show();
-                                                                                                    spnPmtDay.setFocusable(true);
-                                                                                                }else {
-                                                                                                    spnPmtDay.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                                    pmtDay = spnPmtDay.getSelectedItem().toString();
-                                                                                                    if (spnFirstWeek.getSelectedItemId() <= 0){
-                                                                                                        spnFirstWeek.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                                        alerta = alertaErro();
-                                                                                                        alerta.show();
-                                                                                                        spnFirstWeek.setFocusable(true);
-                                                                                                    }else {
-                                                                                                        spnFirstWeek.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                                        firtsWeek = spnFirstWeek.getSelectedItem().toString();
-                                                                                                        if (spnSecDep.getSelectedItemId() <= 0){
-                                                                                                            spnSecDep.setBackgroundColor(Color.parseColor("#ff0000"));
-                                                                                                            alerta = alertaErro();
-                                                                                                            alerta.show();
-                                                                                                            spnSecDep.setFocusable(true);
-                                                                                                        }else {
-                                                                                                            spnSecDep.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                                                                                                            secDep = spnSecDep.getSelectedItem().toString();
-
-                                                                                                            notes = txtNotes.getText().toString();
-
-                                                                                                            List<String> acessorioLista =  new ArrayList<String>();
-
-                                                                                                            if (chkHelmet.isChecked()){
-                                                                                                                acessorioLista.add(helmet);
-                                                                                                            }
-                                                                                                            if (chkPhoneHolder.isChecked()){
-                                                                                                                acessorioLista.add(phoneHolder);
-                                                                                                            }
-                                                                                                            if (chkRemovableRearLight.isChecked()){
-                                                                                                                acessorioLista.add(removableRearLight);
-                                                                                                            }
-                                                                                                            if (chkRemovableFrontLight.isChecked()){
-                                                                                                                acessorioLista.add(removableFrontLight);
-                                                                                                            }
-                                                                                                            if (chkFixedRearLight.isChecked()){
-                                                                                                                acessorioLista.add(fixedRearLight);
-                                                                                                            }
-                                                                                                            if (chkFixedFrontLight.isChecked()){
-                                                                                                                acessorioLista.add(fixedFrontLight);
-                                                                                                            }
-
-                                                                                                            accessories = acessorioLista.toString();
-
-                                                                                                            accessories = accessories.replace("[", "");
-                                                                                                            accessories = accessories.replace("]", "");
-
-                                                                                                            Contract contract = new Contract();
-
-                                                                                                            contract.setFullName(fullName);
-                                                                                                            contract.setPassportNumber(passportNumber);
-                                                                                                            contract.setPassportCountry(passportCountry);
-                                                                                                            contract.setDateBirth(dateBirth);
-                                                                                                            contract.setSexo(sexo);
-                                                                                                            contract.setAddress(address);
-                                                                                                            contract.setSuburb(suburb);
-                                                                                                            contract.setState(state);
-                                                                                                            contract.setPostcode(postCode);
-                                                                                                            contract.setEmail(email);
-                                                                                                            contract.setSchool(school);
-                                                                                                            contract.setVisaAgency(visaAgency);
-                                                                                                            contract.setAustralianNumber(austrNumber);
-                                                                                                            contract.setWhatsApp(whatsNumber);
-                                                                                                            contract.setSerialNumber(serialNumber);
-                                                                                                            contract.setModel(model);
-                                                                                                            contract.setColor(color);
-                                                                                                            contract.setNumberWeeks(weeks);
-                                                                                                            contract.setWeeklyRate(weeklyRate);
-                                                                                                            contract.setStartDate(startDate);
-                                                                                                            contract.setReturnDate(returnDate);
-                                                                                                            contract.setPmtDay(pmtDay);
-                                                                                                            contract.setFirstWeek(firtsWeek);
-                                                                                                            contract.setSecDep(secDep);
-                                                                                                            contract.setAccessoriesIncluded(accessories);
-                                                                                                            contract.setNotes(notes);
-                                                                                                            contract.setUserName(userName);
-
-                                                                                                            BDContract bdContract = new BDContract(MainActivity.this);
-
-                                                                                                            sucesso = bdContract.inserir(contract);
-
-                                                                                                            if (!sucesso) {
-                                                                                                                Snackbar.make(view, "Contract not saved " + accessories, Snackbar.LENGTH_LONG)
-                                                                                                                        .setAction("Action", null).show();
-                                                                                                            } else {
-
-                                                                                                                BDContract bdContract3 = new BDContract(MainActivity.this);
-
-                                                                                                                Contract contr = bdContract3.retornarUltimo();
-
-
-                                                                                                                c = bdContract3.buscarPorId(contr.getIdContract());
-
-                                                                                                                tvFullName.setText("Full Name: \n" + c.getFullName());
-                                                                                                                tvDateBirth.setText("Date of Burth: \n" + c.getDateBirth());
-                                                                                                                tvGender.setText("Gender: \n" + c.getSexo());
-                                                                                                                tvPassportNumber.setText("Passport Num.: \n" + c.getPassportNumber());
-                                                                                                                tvPassportCountry.setText("Passport Country: \n" + c.getPassportCountry());
-                                                                                                                tvEmailClient.setText("E-mail: \n" + c.getEmail());
-                                                                                                                tvAdress.setText("Adress: \n" + c.getAddress());
-                                                                                                                tvSuburb.setText("Suburb: \n" + c.getSuburb());
-                                                                                                                tvState.setText("State: \n" + c.getState());
-                                                                                                                tvPostCode.setText("Post Code: \n" + c.getPostcode());
-                                                                                                                tvSchool.setText("English / VET School: \n" + c.getSchool());
-                                                                                                                tvVisaAgency.setText("Visa Agency: \n" + c.getVisaAgency());
-                                                                                                                tvAustNumber.setText("Australian Mobile Num.: \n" + c.getAustralianNumber());
-                                                                                                                tvWhatsNumber.setText("WhatsApp Number: \n" + c.getWhatsApp());
-                                                                                                                tvSerieNumber.setText("Serial Number: \n" + c.getSerialNumber());
-                                                                                                                tvModel.setText("Model: \n" + c.getModel());
-                                                                                                                tvColor.setText("Color: \n" + c.getColor());
-                                                                                                                tvStartDate.setText("Contract Start Date: \n" + c.getStartDate());
-                                                                                                                tvReturnDate.setText("Equipment Return Date: \n" + c.getReturnDate());
-                                                                                                                tvNumWeeks.setText("Num. of Weeks: \n" + c.getNumberWeeks());
-                                                                                                                tvWeeklyRate.setText("Weekly Rate: \n" + c.getWeeklyRate());
-                                                                                                                tvPmtDay.setText("Rent payment day: \n" + c.getPmtDay());
-                                                                                                                tvFirstWeek.setText("1st Week Rent Paid: \n" + c.getFirstWeek());
-                                                                                                                tvSecDep.setText("Security Deposit paid: \n" + c.getSecDep());
-                                                                                                                tvAccessories.setText("Accessories included in this rent: \n" + c.getAccessoriesIncluded());
-                                                                                                                tvNotes.setText("Notes: \n" + c.getNotes());
-
-                                                                                                                mContent.addView(mSig, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
-
-
-                                                                                                                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includecliente).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includebike).setVisibility(View.INVISIBLE);
-                                                                                                                findViewById(R.id.includeassina).setVisibility(View.VISIBLE);
-                                                                                                            }
-                                                                                                        }
-                                                                                                    }
-                                                                                                }
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }//fechamento do else 1
-
-            }
-        });
 
         Button btnAssinaEdt = (Button)findViewById(R.id.btnAssina_edt);
         btnAssinaEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.adicionarContract(c);
+                adapterAll.adicionarContract(c);
                 finish();
-                Intent it = new Intent(MainActivity.this, MainActivity.class);
+                Intent it = new Intent(AllListActivity.this, AllListActivity.class);
                 startActivity(it);
             }
         });
 
-
-        Button btnAssina = (Button)findViewById(R.id.btnAssina);
-        btnAssina.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!chkTerm1.isChecked()) {
-                    chkTerm1.setBackgroundColor(Color.parseColor("#ff0000"));
-                    alerta = alertaErro();
-                    alerta.show();
-                    chkTerm1.setFocusable(true);
-                } else {
-                    chkTerm1.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                    termo1 = 1;
-                    if (!chkTerm3.isChecked()) {
-                        chkTerm3.setBackgroundColor(Color.parseColor("#ff0000"));
-                        alerta = alertaErro();
-                        alerta.show();
-                        chkTerm3.setFocusable(true);
-                    } else {
-                        chkTerm3.setBackgroundColor(Color.parseColor("#9CF3E580"));
-                        termo3 = 1;
-
-                        assinatura = mSig.getBytes();
-                        assBitmap = mSig.getBitmap();
-
-                        Log.d("Claudio", "O Tamanho da Assinatura é: "+ assinatura.length);
-
-                        if (assinatura.length <= 2500){
-                            AlertDialog alertDia;
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setTitle("Error");
-                            builder.setMessage("Please signture in the field");
-                            builder.setPositiveButton("GO", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            });
-
-                            alertDia = builder.create();
-                            alertDia.show();
-                        }else {
-                            int id = c.getIdContract();
-                            String nomeArquivoAss = id+"_ass_"+ System.currentTimeMillis()+".jpg";
-
-                            //saveImageToInternalStorage(nomeArquivo, assinatura);
-
-                            //salvaImagens(nomeArquivo, assBitmap);
-                            boolean salvo;
-
-                            Log.d("claudio", "O arquivo assinatura tem o nome :" + nomeArquivoAss);
-
-                            saveImagemDiretorio(nomeArquivoAss, assBitmap);
-
-                            BDContract bdC = new BDContract(MainActivity.this);
-
-                            salvo = bdC.salvarAssinatura(nomeArquivoAss, id);
-
-                            if (!salvo){
-                                AlertDialog alertDia;
-                                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                builder.setTitle("Error");
-                                builder.setMessage("Please signture in the field");
-                                builder.setPositiveButton("GO", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-
-                                alertDia = builder.create();
-                                alertDia.show();
-                            }else {
-                                adapter.adicionarContract(c);
-                                finish();
-                                Intent it = new Intent(MainActivity.this, MainActivity.class);
-                                startActivity(it);
-
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includecliente).setVisibility(View.VISIBLE);
-                findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-                findViewById(R.id.includeassina).setVisibility(View.INVISIBLE);
-            }
-        });
-
-        configurarRecycler();
+        configurarRecyclerAll();
     }
 
     @Override
@@ -1703,21 +1129,21 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_cancel) {
             finish();
-            Intent it = new Intent(MainActivity.this, MainActivity.class);
+            Intent it = new Intent(AllListActivity.this, AllListActivity.class);
             startActivity(it);
             //Toast.makeText(MainActivity.this, "teste de clique de botão", Toast.LENGTH_LONG).show();
             return true;
         }
         else if (id == R.id.action_list){
             finish();
-            Intent it = new Intent(MainActivity.this, MainActivity.class);
+            Intent it = new Intent(AllListActivity.this, MainActivity.class);
             startActivity(it);
             //Toast.makeText(AllListActivity.this, "teste de clique de botão listar todos", Toast.LENGTH_LONG).show();
             return true;
         }
         else if (id == R.id.action_list_all){
             finish();
-            Intent it = new Intent(MainActivity.this, AllListActivity.class);
+            Intent it = new Intent(AllListActivity.this, AllListActivity.class);
             startActivity(it);
             //Toast.makeText(AllListActivity.this, "teste de clique de botão listar todos", Toast.LENGTH_LONG).show();
             return true;
@@ -1744,73 +1170,19 @@ public class MainActivity extends AppCompatActivity {
         return envio;
     }
 
-    RecyclerView recyclerView;
-    private ContractAdapter adapter;
+    RecyclerView recyclerViewAll;
+    private ContractAllAdapter adapterAll;
 
-    private void configurarRecycler(){
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+    private void configurarRecyclerAll(){
+        recyclerViewAll = (RecyclerView)findViewById(R.id.recyclerViewAll);
         //Configurando o gerenciador de layout para ser uma lista
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManagerAll = new LinearLayoutManager(this);
+        recyclerViewAll.setLayoutManager(layoutManagerAll);
 
-        BDContract bdContract = new BDContract(this);
-        adapter = new ContractAdapter(bdContract.buscarLista());
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-    }
-
-    public void saveImageToInternalStorage(String fileName, byte[] imagem){
-        try {
-            FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fos.write(imagem);
-            fos.close();
-        }catch (IOException e){
-            Log.d("Internal Storage", "Error writing", e);
-        }
-    }
-
-    public static void salvaImagens(String fileName, Bitmap bmp){
-        try{
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] bytes = stream.toByteArray();
-            String nomeArquivo = Environment.getExternalStorageDirectory().getAbsolutePath() + fileName;
-
-            FileOutputStream fos = new FileOutputStream(nomeArquivo);
-            fos.write(bytes);
-            fos.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private void saveImagemDiretorio(String fileName, Bitmap bmp){
-
-        File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-        Log.d("claudio", "o diretorio da assinatura é:"+ diretorio.toString());
-
-        File file = new File(diretorio + "/" + fileName);
-        uriAss = Uri.fromFile(file);
-
-        Log.d("claudio", "o uri da assinatura é:"+ uriAss.toString());
-
-        if (file.exists()){
-            file.delete();
-        }
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        caminhoDaImagem = uriAss.getPath();
-        Log.d("claudio", "caminho da assinatura é:"+ caminhoDaImagem);
-
-
+        BDContract bdContractAll = new BDContract(this);
+        adapterAll = new ContractAllAdapter(bdContractAll.buscarTodos());
+        recyclerViewAll.setAdapter(adapterAll);
+        recyclerViewAll.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
     public void usarCamera(View view, String nomeArquivo){
@@ -1866,22 +1238,4 @@ public class MainActivity extends AppCompatActivity {
         return  cursor.getString(idx);
     }
 
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
-        if (requestCode == PERMISSAO_REQUEST) {
-
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                // A permissão foi concedida. Pode continuar
-            }
-            else {
-                // A permissão foi negada. Precisa ver o que deve ser desabilitado
-            }
-
-            return;
-        }
-    }
 }
