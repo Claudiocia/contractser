@@ -1,6 +1,7 @@
 package au.com.contractser;
 
 import android.Manifest;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,11 +12,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.provider.SearchRecentSuggestions;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,9 +40,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +62,7 @@ import java.util.List;
 
 import au.com.contractser.databases.BDContract;
 import au.com.contractser.models.Contract;
+import au.com.contractser.provider.SearchableProvider;
 import au.com.contractser.utils.CaptureSignatureView;
 import au.com.contractser.utils.MaskEditUtil;
 import au.com.contractser.utils.ViewPrintAdapter;
@@ -1690,6 +1696,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        androidx.appcompat.widget.SearchView searchView;
+        MenuItem item = menu.findItem(R.id.action_searchable_activity);
+
+        searchView = (androidx.appcompat.widget.SearchView) item.getActionView();
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+        searchView.setOnQueryTextListener(onSearch());
         return true;
     }
 
@@ -1722,7 +1738,29 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(AllListActivity.this, "teste de clique de botão listar todos", Toast.LENGTH_LONG).show();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private androidx.appcompat.widget.SearchView.OnQueryTextListener onSearch(){
+        return new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                intent.putExtra("query", query);
+                SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(MainActivity.this,
+                        SearchableProvider.AUTHORITY,
+                        SearchableProvider.MODE);
+                searchRecentSuggestions.saveRecentQuery(query, null);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        };
     }
 
     public AlertDialog alertaErro(){

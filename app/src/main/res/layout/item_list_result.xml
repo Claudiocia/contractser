@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/nome_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="28"
+            android:text="Full Name"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/bike_dados_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nome_res"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Bike"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/end_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bike_dados_res"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Address"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/email_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/end_res"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/telefone_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:text="Tel Number"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/telefone2_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/telefone_res"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:text="WhatsApp"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -309,6 +309,64 @@ public class BDContract {
         return (list);
     }
 
+    //Metodo da busca search
+    public List<Contract> searchContract(String search){
+        List<Contract> list = new ArrayList<Contract>();
+
+        String[] colunas = new String[]{"idContract", "fullName", "passportNumber", "passportCountry", "dateBirth", "sexo",
+                "address", "suburb", "state", "postcode", "email", "school", "visaAgency", "australianNumber", "whatsApp",
+                "serialNumber", "model", "color", "numberWeeks", "weeklyRate", "startDate", "returnDate", "pmtDay", "firstWeek",
+                "secDep", "accessoriesIncluded", "notes", "ativo", "fechaData", "passportPhoto", "assinaturaPhoto", "userName",
+                "termo1", "termo2", "termo3"};
+
+        Cursor cursor = bd.rawQuery("SELECT * FROM tbl_contracts WHERE fullName LIKE '%"+ search +"%' OR serialNumber LIKE '%"+ search +"%' OR model LIKE '%"+ search +"%'", null);
+
+        if (cursor.getCount() > 0){
+            cursor.moveToFirst();
+            do{
+                Contract contract = new Contract();
+                contract.setIdContract(cursor.getInt(0));
+                contract.setFullName(cursor.getString(1));
+                contract.setPassportNumber(cursor.getString(2));
+                contract.setPassportCountry(cursor.getString(3));
+                contract.setDateBirth(cursor.getString(4));
+                contract.setSexo(cursor.getString(5));
+                contract.setAddress(cursor.getString(6));
+                contract.setSuburb(cursor.getString(7));
+                contract.setState(cursor.getString(8));
+                contract.setPostcode(cursor.getString(9));
+                contract.setEmail(cursor.getString(10));
+                contract.setSchool(cursor.getString(11));
+                contract.setVisaAgency(cursor.getString(12));
+                contract.setAustralianNumber(cursor.getString(13));
+                contract.setWhatsApp(cursor.getString(14));
+                contract.setSerialNumber(cursor.getString(15));
+                contract.setModel(cursor.getString(16));
+                contract.setColor(cursor.getString(17));
+                contract.setNumberWeeks(cursor.getString(18));
+                contract.setWeeklyRate(cursor.getString(19));
+                contract.setStartDate(cursor.getString(20));
+                contract.setReturnDate(cursor.getString(21));
+                contract.setPmtDay(cursor.getString(22));
+                contract.setFirstWeek(cursor.getString(23));
+                contract.setSecDep(cursor.getString(24));
+                contract.setAccessoriesIncluded(cursor.getString(25));
+                contract.setNotes(cursor.getString(26));
+                contract.setAtivo(cursor.getInt(27));
+                contract.setFechaData(cursor.getString(28));
+                contract.setPassportPhoto(cursor.getString(29));
+                contract.setAssinaturaPhoto(cursor.getString(30));
+                contract.setUserName(cursor.getString(31));
+                contract.setTermo1(cursor.getInt(32));
+                contract.setTermo2(cursor.getInt(33));
+                contract.setTermo3(cursor.getInt(34));
+                list.add(contract);
+            }while (cursor.moveToNext());
+        }
+
+        return (list);
+    }
+
     public List<Contract> buscarLista(){
         List<Contract> list = new ArrayList<Contract>();
 

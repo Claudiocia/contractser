@@ -19,4 +19,6 @@
     <string name="phoneBusiness">Mobile Num.: 0 434-413-679</string>
     <string name="personRenting">Person who is renting the bicycle – Hirer</string>
     <string name="tituloBike">Bike specifications and accessories</string>
+    <string name="action_searchable_activity">Client Search</string>
+    <string name="search_hint">search client</string>
 </resources>

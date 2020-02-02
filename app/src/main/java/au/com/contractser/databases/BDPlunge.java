@@ -61,7 +61,7 @@ public class BDPlunge extends SQLiteOpenHelper {
                 String arg = ""+1;
                 String[] args = new String[]{arg};
 
-                Cursor cursor =  db.query("tbl_user", colunas, "_id = ?", args, null, null, null);
+                Cursor cursor =  db.query("tbl_user", colunas, "idUser = ?", args, null, null, null);
                 if (cursor.getCount() > 0){
                     cursor.moveToFirst();
                     user.setIdUser(cursor.getInt(0));
